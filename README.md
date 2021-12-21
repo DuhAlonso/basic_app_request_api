@@ -20,9 +20,7 @@ Este app foi criado com base no curso de flutter para consumo de API's
 
 ## Screenshots
 
-<img src="https://github.com/DuhAlonso/basic_app_request_api/blob/master/screenshot/Screen1.png" width="250"> <img src="https://github.com/DuhAlonso/basic_app_request_api/blob/master/screenshot/Screen2.png" width="250">
-
-<img src="https://github.com/DuhAlonso/basic_app_request_api/blob/master/screenshot/Screen3.png" width="250"> <img src="https://github.com/DuhAlonso/basic_app_request_api/blob/master/screenshot/Screen4.png" width="250">
+<img src="https://github.com/DuhAlonso/basic_app_request_api/blob/master/screenshot/Screen1.png" width="250"> <img src="https://github.com/DuhAlonso/basic_app_request_api/blob/master/screenshot/Screen2.png" width="250"> <img src="https://github.com/DuhAlonso/basic_app_request_api/blob/master/screenshot/Screen4.png" width="250">
 
 ### Estudar é fundamental para um bom futuro, estudar e praticar é a chave do SUCESSO!
 
