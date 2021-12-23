@@ -21,23 +21,35 @@ class _HomeState extends State<Home> {
 
   _searchCEP() async {
     String cep = _cepController.text;
-    String urlApi = 'https://viacep.com.br/ws/$cep/json';
-    http.Response response;
-    response = await http.get(Uri.parse(urlApi));
-    Map<String, dynamic> request = jsonDecode(response.body);
 
-    if (response.statusCode == 200 && cep != '' && cep != '00000000') {
-      setState(() {
-        logradouro = request['logradouro'];
-        bairro = request['bairro'];
-        localidade = request['localidade'];
-        msg = 'Seu endereço é: $logradouro, $bairro - $localidade ';
-      });
+    if (cep.isEmpty || cep.length < 8) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            title: Text('Error'),
+            content: Text('CEP inválido! Tente utilizar um CEP válido.'),
+          );
+        },
+      );
     } else {
-      setState(() {
-        msg = 'CEP Inválido';
-      });
-      throw Exception('Erro no retorno dos dados');
+      String urlApi = 'https://viacep.com.br/ws/$cep/json';
+      http.Response response;
+      response = await http.get(Uri.parse(urlApi));
+      Map<String, dynamic> request = jsonDecode(response.body);
+      if (request['logradouro'] != null) {
+        setState(() {
+          logradouro = request['logradouro'];
+          bairro = request['bairro'];
+          localidade = request['localidade'];
+          msg = 'Seu endereço é: $logradouro, $bairro - $localidade ';
+        });
+      } else if (request['erro'].toString() == 'true') {
+        setState(() {
+          msg = 'CEP inválido! Tente utilizar um CEP válido.';
+        });
+        throw Exception('Erro no retorno dos dados');
+      }
     }
   }
 
