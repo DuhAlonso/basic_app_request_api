@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,15 +13,12 @@ class BitPrice extends StatefulWidget {
 class _BitPriceState extends State<BitPrice> {
   String priceBit = '';
 
-  _bitPriceNow() async {
+  Future<Map> _bitPriceNow() async {
     http.Response response;
     response = await http.get(Uri.parse(
       'https://blockchain.info/ticker',
     ));
-    Map<String, dynamic> request = jsonDecode(response.body);
-    setState(() {
-      priceBit = request['BRL']['buy'].toStringAsFixed(2);
-    });
+    return jsonDecode(response.body);
   }
 
   @override
@@ -48,17 +45,41 @@ class _BitPriceState extends State<BitPrice> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
-                child: Text(
-                  'R\$ $priceBit',
-                  style: const TextStyle(
-                      fontSize: 35, fontWeight: FontWeight.bold),
+                child: FutureBuilder<Map>(
+                  future: _bitPriceNow(),
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.done:
+                        if (snapshot.hasError) {
+                          priceBit = 'Erro ao carregar dados';
+                        } else {
+                          double value = snapshot.data!['BRL']['buy'];
+                          priceBit = 'R\$ ${value.toString()}';
+                        }
+                        break;
+                      case ConnectionState.waiting:
+                        priceBit = 'Carregando...';
+                        break;
+                      case ConnectionState.active:
+                      case ConnectionState.none:
+                    }
+                    return Text(
+                      priceBit,
+                      style: const TextStyle(
+                          fontSize: 40, fontWeight: FontWeight.bold),
+                    );
+                  },
                 ),
               ),
               TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: Colors.blue,
                     fixedSize: const Size(150, 50)),
-                onPressed: _bitPriceNow,
+                onPressed: () {
+                  setState(() {
+                    _bitPriceNow();
+                  });
+                },
                 child: const Text(
                   'Atualizar',
                   style: TextStyle(color: Colors.white, fontSize: 25),
