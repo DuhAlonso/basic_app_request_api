@@ -48,6 +48,7 @@ class _BitPriceState extends State<BitPrice> {
                 child: FutureBuilder<Map>(
                   future: _bitPriceNow(),
                   builder: (context, snapshot) {
+                    bool isloading = false;
                     switch (snapshot.connectionState) {
                       case ConnectionState.done:
                         if (snapshot.hasError) {
@@ -58,16 +59,19 @@ class _BitPriceState extends State<BitPrice> {
                         }
                         break;
                       case ConnectionState.waiting:
-                        priceBit = 'Carregando...';
+                        isloading = true;
+                        // priceBit = 'Carregando...';
                         break;
                       case ConnectionState.active:
                       case ConnectionState.none:
                     }
-                    return Text(
-                      priceBit,
-                      style: const TextStyle(
-                          fontSize: 40, fontWeight: FontWeight.bold),
-                    );
+                    return isloading
+                        ? const CircularProgressIndicator()
+                        : Text(
+                            priceBit,
+                            style: const TextStyle(
+                                fontSize: 40, fontWeight: FontWeight.bold),
+                          );
                   },
                 ),
               ),
