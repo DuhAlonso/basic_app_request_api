@@ -29,68 +29,62 @@ class _BitPriceState extends State<BitPrice> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('BitPrice'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/bitcoin.png',
-                width: 300,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
-                child: FutureBuilder<Map>(
-                  future: _bitPriceNow(),
-                  builder: (context, snapshot) {
-                    bool isloading = false;
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.done:
-                        if (snapshot.hasError) {
-                          priceBit = 'Erro ao carregar dados';
-                        } else {
-                          double value = snapshot.data!['BRL']['buy'];
-                          priceBit = 'R\$ ${value.toString()}';
-                        }
-                        break;
-                      case ConnectionState.waiting:
-                        isloading = true;
-                        // priceBit = 'Carregando...';
-                        break;
-                      case ConnectionState.active:
-                      case ConnectionState.none:
-                    }
-                    return isloading
-                        ? const CircularProgressIndicator()
-                        : Text(
-                            priceBit,
-                            style: const TextStyle(
-                                fontSize: 40, fontWeight: FontWeight.bold),
-                          );
-                  },
-                ),
-              ),
-              TextButton(
-                style: TextButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    fixedSize: const Size(150, 50)),
-                onPressed: () {
-                  setState(() {
-                    _bitPriceNow();
-                  });
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/bitcoin.png',
+              width: 300,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: FutureBuilder<Map>(
+                future: _bitPriceNow(),
+                builder: (context, snapshot) {
+                  bool isloading = false;
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.done:
+                      if (snapshot.hasError) {
+                        priceBit = 'Erro ao carregar dados';
+                      } else {
+                        double value = snapshot.data!['BRL']['buy'];
+                        priceBit = 'R\$ ${value.toString()}';
+                      }
+                      break;
+                    case ConnectionState.waiting:
+                      isloading = true;
+                      // priceBit = 'Carregando...';
+                      break;
+                    case ConnectionState.active:
+                    case ConnectionState.none:
+                  }
+                  return isloading
+                      ? const CircularProgressIndicator()
+                      : Text(
+                          priceBit,
+                          style: const TextStyle(
+                              fontSize: 40, fontWeight: FontWeight.bold),
+                        );
                 },
-                child: const Text(
-                  'Atualizar',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              )
-            ],
-          ),
+              ),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue, fixedSize: const Size(150, 50)),
+              onPressed: () {
+                setState(() {
+                  _bitPriceNow();
+                });
+              },
+              child: const Text(
+                'Atualizar',
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
+            )
+          ],
         ),
       ),
     );
