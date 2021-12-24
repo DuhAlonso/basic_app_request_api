@@ -6,6 +6,7 @@ Este app foi criado com base no curso de flutter para consumo de API's
 
 :iphone: Buscando endereço com base no cep.
 :iphone: Buscando preço do bitcoin.
+:iphone: Criando uma lista com dados vindo da API.
 
 - [Instalação do flutter](https://flutter.dev/docs/get-started)
 - [O que é Widgets?](https://flutter.dev/docs/development/ui/widgets)
@@ -21,7 +22,7 @@ Este app foi criado com base no curso de flutter para consumo de API's
 ## Screenshots
 
 <img src="https://github.com/DuhAlonso/basic_app_request_api/blob/master/screenshot/Screen1.png" width="250"> <img src="https://github.com/DuhAlonso/basic_app_request_api/blob/master/screenshot/Screen2.png" width="250"> <img src="https://github.com/DuhAlonso/basic_app_request_api/blob/master/screenshot/Screen3.png" width="250"> 
-<img src="https://github.com/DuhAlonso/basic_app_request_api/blob/master/screenshot/Screen4.png" width="250">
+<img src="https://github.com/DuhAlonso/basic_app_request_api/blob/master/screenshot/Screen4.png" width="250"> <img src="https://github.com/DuhAlonso/basic_app_request_api/blob/master/screenshot/Screen5.png" width="250">
 
 ### Estudar é fundamental para um bom futuro, estudar e praticar é a chave do SUCESSO!
 
