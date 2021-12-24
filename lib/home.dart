@@ -22,13 +22,16 @@ class _HomeState extends State<Home> {
   _searchCEP() async {
     String cep = _cepController.text;
 
-    if (cep.isEmpty || cep.length < 8) {
+    if (cep.length < 8) {
       showDialog(
         context: context,
         builder: (context) {
           return const AlertDialog(
             title: Text('Error'),
+            titleTextStyle: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red),
             content: Text('CEP inválido! Tente utilizar um CEP válido.'),
+            contentTextStyle: TextStyle(fontSize: 20, color: Colors.black),
           );
         },
       );
@@ -48,7 +51,6 @@ class _HomeState extends State<Home> {
         setState(() {
           msg = 'CEP inválido! Tente utilizar um CEP válido.';
         });
-        throw Exception('Erro no retorno dos dados');
       }
     }
   }
@@ -57,7 +59,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Consumindo API VIACEP'),
+        title: const Text('Consumindo API - VIACEP'),
       ),
       body: SingleChildScrollView(
         child: Padding(
