@@ -1,4 +1,4 @@
-import 'package:consumindo_api/api_advanced.dart';
+import 'package:consumindo_api/list_posts.dart';
 import 'package:consumindo_api/bit_price.dart';
 import 'package:consumindo_api/search_cep.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int indexNow = 0;
-  final List<Widget> _screens = const [SearchCep(), BitPrice(), ApiAdvanced()];
+  final List<Widget> _screens = const [SearchCep(), BitPrice(), ListPosts()];
 
   @override
   Widget build(BuildContext context) {
